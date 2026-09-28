@@ -303,6 +303,22 @@ export default function HoursCalculator() {
                       <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
                       <span>{accreditedHoursQuarter} horas acumuladas en un trimestre formativo para tu convalidación universitaria.</span>
                     </p>
+
+                    {/* Visual Progress towards Standard University PPP (120 hrs) */}
+                    <div className="mt-4 pt-3 border-t border-white/[0.06]">
+                      <div className="flex justify-between text-[11px] text-slate-400 mb-1.5 font-medium">
+                        <span>Meta Convalidación Curricular (120 hrs)</span>
+                        <span className="font-mono text-cyan-400 font-bold">
+                          {Math.min(100, Math.round((accreditedHoursQuarter / 120) * 100))}% alcanzado
+                        </span>
+                      </div>
+                      <div className="w-full h-2 rounded-full bg-obsidian-950 border border-white/10 overflow-hidden">
+                        <div 
+                          className="h-full rounded-full bg-gradient-to-r from-indigo-500 via-cyan-400 to-emerald-400 transition-all duration-500"
+                          style={{ width: `${Math.min(100, Math.round((accreditedHoursQuarter / 120) * 100))}%` }}
+                        />
+                      </div>
+                    </div>
                   </div>
 
                   {/* Immediate Referral Income (if any) */}

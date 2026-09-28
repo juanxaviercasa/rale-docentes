@@ -2,7 +2,10 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Bot, BarChart3, Timer, Award, CheckCircle2, Sparkles, Terminal, ArrowUpRight } from 'lucide-react';
+import { 
+  Bot, BarChart3, Timer, Award, CheckCircle2, Sparkles, 
+  Terminal, Shield, Eye, Layers, Cpu, Compass, Activity
+} from 'lucide-react';
 import SpotlightCard from './SpotlightCard';
 
 interface FeatureTab {
@@ -18,14 +21,78 @@ interface FeatureTab {
 }
 
 export default function EdTechStackTabs() {
-  const [activeTab, setActiveTab] = useState<string>('ia-pedagogica');
+  const [activeTab, setActiveTab] = useState<string>('plataforma-3d');
+  const [activeHotspot, setActiveHotspot] = useState<number | null>(null);
 
   const tabs: FeatureTab[] = [
+    {
+      id: 'plataforma-3d',
+      name: 'Centro de Mando RALE OS',
+      badge: 'Visual 3D & Telemetría',
+      icon: <Cpu className="w-4 h-4 text-cyan-400" />,
+      headline: 'Plataforma Virtual con Telemetría Militar en Tiempo Real',
+      description:
+        'Experimenta la interfaz RALE OS diseñada para docentes de alto rendimiento. Controla la asistencia en vivo, analiza el rendimiento cognitivo de los cadetes y despliega simulaciones tácticas con un clic.',
+      features: [
+        'HUD táctico con métricas en tiempo real de cadetes conectados',
+        'Monitoreo de puntualidad y participación reglamentaria militar',
+        'Algoritmo predictivo de vacante directa para EMCH, EOFAP y PNP',
+      ],
+      mockupTitle: 'RALE OS v4.2 · Interfaz de Telemetría Docente',
+      mockupContent: (
+        <div className="relative rounded-xl overflow-hidden border border-cyan-500/30 group">
+          {/* Main Visual Asset: edtech-platform-preview */}
+          <div className="relative aspect-[16/10] w-full overflow-hidden bg-obsidian-950">
+            <img 
+              src="/images/edtech-platform-preview.jpg" 
+              alt="Plataforma EdTech RALE con telemetría de cadetes premilitares y generador IA"
+              className="w-full h-full object-cover brightness-105 contrast-105 group-hover:scale-105 transition-transform duration-700 ease-out"
+            />
+            {/* Tech Scanline Grid Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-transparent to-black/30 pointer-events-none" />
+            <div 
+              className="absolute inset-0 opacity-15 pointer-events-none"
+              style={{
+                backgroundImage: 'linear-gradient(rgba(6, 182, 212, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.2) 1px, transparent 1px)',
+                backgroundSize: '24px 24px'
+              }}
+            />
+
+            {/* Tactical Interactive Hotspots */}
+            <div className="absolute top-4 left-4 z-20 flex items-center gap-2 px-2.5 py-1 rounded-full bg-obsidian-950/85 backdrop-blur-md border border-cyan-500/40 text-[11px] font-mono text-cyan-300 shadow-lg">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+              <span>SISTEMA TELEMETRÍA EN LÍNEA</span>
+            </div>
+
+            <div className="absolute top-4 right-4 z-20 hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-full bg-indigo-950/85 backdrop-blur-md border border-indigo-500/40 text-[11px] font-mono text-indigo-300">
+              <Activity className="w-3.5 h-3.5 text-cyan-400" />
+              <span>COHORTE 2026-I</span>
+            </div>
+
+            {/* Floating Telemetry Info Cards */}
+            <div className="absolute bottom-3 left-3 right-3 z-20 grid grid-cols-3 gap-2">
+              <div className="p-2 rounded-lg bg-obsidian-950/90 backdrop-blur-md border border-white/10 text-center">
+                <span className="text-[10px] text-slate-400 block font-mono">Cadetes Activos</span>
+                <span className="text-xs sm:text-sm font-extrabold text-white font-mono">48 Aspirantes</span>
+              </div>
+              <div className="p-2 rounded-lg bg-obsidian-950/90 backdrop-blur-md border border-cyan-500/30 text-center">
+                <span className="text-[10px] text-cyan-300 block font-mono">Precisión IA</span>
+                <span className="text-xs sm:text-sm font-extrabold text-cyan-400 font-mono">98.4% Balotario</span>
+              </div>
+              <div className="p-2 rounded-lg bg-obsidian-950/90 backdrop-blur-md border border-emerald-500/30 text-center">
+                <span className="text-[10px] text-emerald-300 block font-mono">Prob. Ingreso</span>
+                <span className="text-xs sm:text-sm font-extrabold text-emerald-400 font-mono">92.6% Aulas</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ),
+    },
     {
       id: 'ia-pedagogica',
       name: 'IA Pedagógica Aplicada',
       badge: 'Capacitación Incluida',
-      icon: <Bot className="w-5 h-5 text-cyan-400" />,
+      icon: <Bot className="w-4 h-4 text-cyan-400" />,
       headline: 'Ahorra 10+ horas semanales en preparación con prompts docentes',
       description:
         'Aprenderás a estructurar prompts de alta precisión para generar balotarios de preguntas tipo admisión militar, desglosar pasos algebraicos complejos y crear explicaciones personalizadas según el nivel de cada postulante.',
@@ -36,30 +103,30 @@ export default function EdTechStackTabs() {
       ],
       mockupTitle: 'RALE AI Assistant · Prompt Pedagógico v2.4',
       mockupContent: (
-        <div className="space-y-3 font-mono text-xs text-slate-300">
+        <div className="space-y-3 font-mono text-xs text-slate-300 p-2">
           <div className="flex items-center justify-between pb-2 border-b border-white/[0.08] text-[11px] text-slate-400">
-            <span className="flex items-center gap-1.5 text-cyan-400">
+            <span className="flex items-center gap-1.5 text-cyan-400 font-bold">
               <Terminal className="w-3.5 h-3.5" />
               <span>Prompt Generador RALE</span>
             </span>
-            <span className="text-emerald-400">Filtro: Admisión EMCH 2026</span>
+            <span className="text-emerald-400 font-bold">Filtro: Admisión EMCH 2026</span>
           </div>
-          <div className="p-3 rounded-lg bg-obsidian-950/80 border border-white/[0.06] text-slate-300">
-            <span className="text-indigo-400">&gt; Generar reactivo de Física Mecánica (Estática de Fuerzas)</span>
-            <p className="mt-1 text-slate-400">Nivel: Alto Rendimiento Oficiales · Tiempo límite: 90 segundos</p>
+          <div className="p-3 rounded-lg bg-obsidian-950/90 border border-white/[0.08] text-slate-300 shadow-inner">
+            <span className="text-indigo-400 font-bold">&gt; Generar reactivo de Física Mecánica (Estática de Fuerzas)</span>
+            <p className="mt-1 text-slate-400 text-[11px]">Nivel: Alto Rendimiento Oficiales · Tiempo sugerido: 90 segundos</p>
           </div>
-          <div className="p-3 rounded-lg bg-cyan-950/30 border border-cyan-500/20 text-cyan-200">
+          <div className="p-3 rounded-lg bg-cyan-950/30 border border-cyan-500/25 text-cyan-200">
             <div className="flex items-center gap-1.5 font-bold text-cyan-300 mb-1">
-              <Sparkles className="w-3.5 h-3.5" />
+              <Sparkles className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
               <span>Reactivo Generado con Solucionario:</span>
             </div>
-            <p className="text-[11px] text-slate-300">
+            <p className="text-[11px] text-slate-300 leading-relaxed">
               «Un cuerpo de 40 N reposa sobre un plano inclinado de 37° sujeto a un resorte... Determine la fuerza normal y el coeficiente de fricción estática mínimo.»
             </p>
-            <div className="mt-2 text-[10px] text-emerald-400 flex items-center gap-2">
-              <span>✓ Clave: Alternativa C</span>
+            <div className="mt-2.5 pt-2 border-t border-cyan-500/20 text-[10px] text-emerald-400 flex flex-wrap items-center gap-3">
+              <span className="font-bold">✓ Clave: Alternativa C</span>
               <span>✓ Esquema DCL integrado</span>
-              <span>✓ Tiempo de creación: 1.2s</span>
+              <span className="text-cyan-300">✓ Tiempo de generación: 1.2s</span>
             </div>
           </div>
         </div>
@@ -69,7 +136,7 @@ export default function EdTechStackTabs() {
       id: 'analitica',
       name: 'Analítica Predictiva',
       badge: 'Monitoreo en Tiempo Real',
-      icon: <BarChart3 className="w-5 h-5 text-indigo-400" />,
+      icon: <BarChart3 className="w-4 h-4 text-indigo-400" />,
       headline: 'Visualiza la probabilidad de ingreso de tus estudiantes',
       description:
         'Cada simulacro alimenta un panel docente que te muestra con precisión matemática qué temas necesitan refuerzo, qué alumnos están listos para el examen y cuál es la curva de mejora de tu aula.',
@@ -80,32 +147,37 @@ export default function EdTechStackTabs() {
       ],
       mockupTitle: 'Dashboard de Aula Docente · Cohorte Cadetes A',
       mockupContent: (
-        <div className="space-y-3 font-sans text-xs">
+        <div className="space-y-3 font-sans text-xs p-2">
           <div className="flex items-center justify-between pb-2 border-b border-white/[0.08] text-[11px]">
-            <span className="font-bold text-white">Simulacro General N° 08 · RALE</span>
+            <span className="font-bold text-white flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-cyan-400" />
+              Simulacro General N° 08 · RALE
+            </span>
             <span className="text-emerald-400 font-mono font-bold">+14.2% Promedio Global</span>
           </div>
           <div className="grid grid-cols-3 gap-2">
-            <div className="p-2.5 rounded-lg bg-obsidian-950 border border-white/[0.06]">
+            <div className="p-3 rounded-lg bg-obsidian-950 border border-white/[0.08] text-center">
               <span className="text-[10px] text-slate-400 block">Aspirantes EMCH</span>
               <span className="text-base font-extrabold text-white font-mono">16.4/20</span>
-              <span className="text-[10px] text-emerald-400 block mt-0.5">89% probabilidad</span>
+              <span className="text-[10px] text-emerald-400 block mt-0.5 font-bold">89% probabilidad</span>
             </div>
-            <div className="p-2.5 rounded-lg bg-obsidian-950 border border-white/[0.06]">
+            <div className="p-3 rounded-lg bg-obsidian-950 border border-white/[0.08] text-center">
               <span className="text-[10px] text-slate-400 block">Aspirantes EOFAP</span>
               <span className="text-base font-extrabold text-white font-mono">17.1/20</span>
-              <span className="text-[10px] text-emerald-400 block mt-0.5">93% probabilidad</span>
+              <span className="text-[10px] text-emerald-400 block mt-0.5 font-bold">93% probabilidad</span>
             </div>
-            <div className="p-2.5 rounded-lg bg-obsidian-950 border border-white/[0.06]">
+            <div className="p-3 rounded-lg bg-obsidian-950 border border-white/[0.08] text-center">
               <span className="text-[10px] text-slate-400 block">Aspirantes PNP</span>
               <span className="text-base font-extrabold text-white font-mono">15.8/20</span>
-              <span className="text-[10px] text-emerald-400 block mt-0.5">84% probabilidad</span>
+              <span className="text-[10px] text-emerald-400 block mt-0.5 font-bold">84% probabilidad</span>
             </div>
           </div>
-          <div className="p-2.5 rounded-lg bg-indigo-950/30 border border-indigo-500/20 text-indigo-200">
-            <span className="text-[11px] font-bold block mb-0.5 text-indigo-300">Recomendación Didáctica del Algoritmo:</span>
-            <p className="text-[11px] text-slate-300">
-              Reforzar Geometría del Espacio y Razonamiento Lógico en el bloque del viernes para cerrar la brecha del 7% de cadetes.
+          <div className="p-3 rounded-lg bg-indigo-950/40 border border-indigo-500/25 text-indigo-200">
+            <span className="text-[11px] font-bold block mb-0.5 text-indigo-300">
+              💡 Recomendación Didáctica del Algoritmo:
+            </span>
+            <p className="text-[11px] text-slate-300 leading-relaxed">
+              Reforzar Geometría del Espacio y Razonamiento Lógico en el bloque del viernes para cerrar la brecha del 7% de cadetes en la zona media.
             </p>
           </div>
         </div>
@@ -115,7 +187,7 @@ export default function EdTechStackTabs() {
       id: 'simulacros',
       name: 'Simulacros Digitales',
       badge: 'Evaluación Dinámica',
-      icon: <Timer className="w-5 h-5 text-emerald-400" />,
+      icon: <Timer className="w-4 h-4 text-emerald-400" />,
       headline: 'Plataforma cronometrada bajo el estándar de las FF.AA.',
       description:
         'Tus estudiantes experimentan la presión real del examen de admisión con cronómetro estricto, algoritmos anti-plagio y retroalimentación pedagógica tras cada entrega.',
@@ -126,29 +198,29 @@ export default function EdTechStackTabs() {
       ],
       mockupTitle: 'Simulador Cronometrado · RALE Test Engine',
       mockupContent: (
-        <div className="space-y-3 font-sans text-xs">
+        <div className="space-y-3 font-sans text-xs p-2">
           <div className="flex items-center justify-between pb-2 border-b border-white/[0.08]">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-red-400 animate-ping" />
-              <span className="font-bold text-white">Simulacro Tipo PNP / EOFAP</span>
+              <span className="w-2.5 h-2.5 rounded-full bg-red-400 animate-ping" />
+              <span className="font-bold text-white text-xs">Simulacro Tipo PNP / EOFAP</span>
             </div>
-            <span className="font-mono text-cyan-400 font-extrabold bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800">
-              Tiempo: 01:24:19
+            <span className="font-mono text-cyan-400 font-extrabold bg-cyan-950/80 px-2.5 py-0.5 rounded-lg border border-cyan-700/60 shadow-inner">
+              Tiempo Restante: 01:24:19
             </span>
           </div>
-          <div className="p-3 rounded-lg bg-obsidian-950 border border-white/[0.06]">
+          <div className="p-3.5 rounded-lg bg-obsidian-950 border border-white/[0.08]">
             <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-wider block mb-1">
               Pregunta 42 de 100 · Razonamiento Matemático
             </span>
-            <p className="text-slate-200 text-xs">
+            <p className="text-slate-200 text-xs leading-relaxed">
               «Si el triple de la edad de un postulante hace 4 años es igual al doble de la que tendrá dentro de 6 años, ¿cuál es su edad actual?»
             </p>
           </div>
           <div className="grid grid-cols-2 gap-2 text-[11px]">
-            <div className="p-2 rounded bg-obsidian-850 border border-white/[0.06] text-slate-300">A) 21 años</div>
-            <div className="p-2 rounded bg-emerald-950/40 border border-emerald-500/40 text-emerald-300 font-bold">B) 24 años (Marcada)</div>
-            <div className="p-2 rounded bg-obsidian-850 border border-white/[0.06] text-slate-300">C) 19 años</div>
-            <div className="p-2 rounded bg-obsidian-850 border border-white/[0.06] text-slate-300">D) 26 años</div>
+            <div className="p-2.5 rounded-lg bg-obsidian-850 border border-white/[0.06] text-slate-300">A) 21 años</div>
+            <div className="p-2.5 rounded-lg bg-emerald-950/40 border border-emerald-500/50 text-emerald-300 font-bold">B) 24 años (Marcada ✓)</div>
+            <div className="p-2.5 rounded-lg bg-obsidian-850 border border-white/[0.06] text-slate-300">C) 19 años</div>
+            <div className="p-2.5 rounded-lg bg-obsidian-850 border border-white/[0.06] text-slate-300">D) 26 años</div>
           </div>
         </div>
       ),
@@ -157,7 +229,7 @@ export default function EdTechStackTabs() {
       id: 'disciplina',
       name: 'Disciplina Pre-Militar',
       badge: 'Cero Estrés de Aula',
-      icon: <Award className="w-5 h-5 text-amber-400" />,
+      icon: <Award className="w-4 h-4 text-amber-400" />,
       headline: 'Alumnos que valoran cada minuto de tu clase',
       description:
         'Olvídate de lidiar con problemas de indisciplina o desinterés. Los cadetes de la Academia RALE postulan por vocación estricta y respetan la autoridad docente con puntualidad, asistencia y máxima atención.',
@@ -168,12 +240,13 @@ export default function EdTechStackTabs() {
       ],
       mockupTitle: 'Código de Aula · Academia RALE Pre-Militar',
       mockupContent: (
-        <div className="space-y-3 font-sans text-xs">
+        <div className="space-y-3 font-sans text-xs p-2">
           <div className="flex items-center justify-between pb-2 border-b border-white/[0.08]">
-            <span className="font-bold text-amber-400 uppercase tracking-wider text-[11px]">
+            <span className="font-bold text-amber-400 uppercase tracking-wider text-[11px] flex items-center gap-1.5">
+              <Shield className="w-3.5 h-3.5 text-amber-400" />
               Estándar de Conducta del Cadete
             </span>
-            <span className="text-[10px] text-slate-400">Reglamento RALE 2026</span>
+            <span className="text-[10px] text-slate-400 font-mono">Reglamento RALE 2026</span>
           </div>
           <div className="space-y-2">
             {[
@@ -181,7 +254,7 @@ export default function EdTechStackTabs() {
               'Participación activa con micrófono y solicitud de palabra reglamentaria.',
               'Cumplimiento del 100% de tareas y simulacros semanales programados.',
             ].map((rule, idx) => (
-              <div key={idx} className="flex items-start gap-2 p-2 rounded bg-obsidian-950 border border-white/[0.06]">
+              <div key={idx} className="flex items-start gap-2.5 p-2.5 rounded-lg bg-obsidian-950 border border-white/[0.06]">
                 <span className="w-4 h-4 rounded-full bg-amber-500/20 text-amber-400 text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
                   {idx + 1}
                 </span>
@@ -197,25 +270,40 @@ export default function EdTechStackTabs() {
   const currentTab = tabs.find((t) => t.id === activeTab) || tabs[0];
 
   return (
-    <section id="tecnologia" className="py-24 relative overflow-hidden bg-obsidian-950">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <section id="tecnologia" className="py-24 relative overflow-hidden bg-obsidian-950 border-t border-white/[0.06]">
+      {/* Dynamic Background Image Layer with Tech HUD & Glow Particles */}
+      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+        <img 
+          src="/images/tech-gradient-bg.jpg" 
+          alt="Fondo tecnológico degradado RALE EdTech"
+          className="w-full h-full object-cover opacity-20 mix-blend-screen"
+        />
+        <div 
+          className="absolute inset-0 bg-gradient-to-b from-obsidian-950 via-obsidian-950/80 to-obsidian-950" 
+        />
+        {/* Glow Spheres */}
+        <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[140px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[140px]" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-semibold uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-xs font-semibold uppercase tracking-wider mb-4 backdrop-blur-md">
             <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Innovación en el Aula</span>
+            <span>Innovación en el Aula Pre-Militar</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
             El Ecosistema EdTech que Dominarás
           </h2>
-          <p className="text-slate-400 text-base sm:text-lg mt-3 leading-relaxed">
-            No somos una academia tradicional de pizarra. Te capacitamos en las tecnologías educativas que están transformando la preparación pre-universitaria.
+          <p className="text-slate-300 text-base sm:text-lg mt-3 leading-relaxed">
+            No somos una academia tradicional de pizarra. Te capacitamos gratuitamente en las tecnologías educativas y herramientas de IA que están transformando la preparación pre-universitaria.
           </p>
         </div>
 
         {/* Tab Switcher Buttons */}
-        <div className="flex flex-wrap justify-center gap-2.5 mb-10">
+        <div className="flex flex-wrap justify-center gap-2 mb-10">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
             return (
@@ -223,10 +311,10 @@ export default function EdTechStackTabs() {
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 type="button"
-                className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 border ${
+                className={`flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 border ${
                   isActive
-                    ? 'bg-indigo-600 text-white border-indigo-400 shadow-md shadow-indigo-600/30'
-                    : 'bg-obsidian-900 text-slate-300 border-white/[0.08] hover:border-white/20 hover:bg-obsidian-850'
+                    ? 'bg-gradient-to-r from-indigo-600 to-cyan-600 text-white border-cyan-400/80 shadow-lg shadow-cyan-500/20 scale-[1.02]'
+                    : 'bg-obsidian-900/90 text-slate-300 border-white/[0.08] hover:border-white/20 hover:bg-obsidian-850'
                 }`}
               >
                 <span>{tab.icon}</span>
@@ -249,8 +337,8 @@ export default function EdTechStackTabs() {
               
               {/* Description & List (6 cols) */}
               <div className="lg:col-span-6 flex flex-col gap-5">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold w-max bg-cyan-500/10 border border-cyan-500/30 text-cyan-300">
-                  <span className="w-2 h-2 rounded-full bg-cyan-400" />
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold w-max bg-cyan-500/10 border border-cyan-500/30 text-cyan-300">
+                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
                   {currentTab.badge}
                 </span>
 
@@ -272,24 +360,37 @@ export default function EdTechStackTabs() {
                     </div>
                   ))}
                 </div>
+
+                <div className="pt-2">
+                  <div className="p-3.5 rounded-xl bg-obsidian-900/90 border border-cyan-500/30 flex items-center justify-between text-xs">
+                    <span className="text-slate-300 flex items-center gap-2">
+                      <Shield className="w-4 h-4 text-cyan-400" />
+                      <span>Capacitación Docente 100% Sin Costo</span>
+                    </span>
+                    <span className="text-cyan-400 font-bold font-mono">INCLUIDO</span>
+                  </div>
+                </div>
               </div>
 
               {/* Live Interactive UI Showcase Card (6 cols) */}
               <div className="lg:col-span-6">
                 <SpotlightCard
-                  className="p-6 border-indigo-500/30 bg-obsidian-900 shadow-2xl relative"
-                  spotlightColor="rgba(6, 182, 212, 0.2)"
+                  className="p-5 sm:p-6 border-cyan-500/30 bg-obsidian-900/95 shadow-2xl relative"
+                  spotlightColor="rgba(6, 182, 212, 0.25)"
                 >
-                  <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-white/[0.08]">
+                  <div className="flex items-center justify-between pb-3.5 mb-3 border-b border-white/[0.08]">
                     <div className="flex items-center gap-2">
                       <span className="w-3 h-3 rounded-full bg-red-500/80 inline-block" />
                       <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
                       <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
-                      <span className="text-[11px] text-slate-400 font-mono ml-2">
+                      <span className="text-[11px] text-slate-300 font-mono ml-2">
                         {currentTab.mockupTitle}
                       </span>
                     </div>
-                    <span className="text-[10px] text-slate-500 font-mono">Live Demo</span>
+                    <span className="text-[10px] text-cyan-400 font-mono bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800/60 flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
+                      Live Demo
+                    </span>
                   </div>
 
                   {currentTab.mockupContent}

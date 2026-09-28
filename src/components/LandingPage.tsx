@@ -306,6 +306,12 @@ function Hero() {
               enableTilt={true}
             >
               <div className="relative rounded-2xl overflow-hidden bg-obsidian-950 border border-white/10 aspect-[4/3] sm:aspect-[16/11]">
+                {/* Tactical HUD Corner Elements */}
+                <div className="absolute top-2 left-2 w-3.5 h-3.5 border-t-2 border-l-2 border-cyan-400 z-20 pointer-events-none" />
+                <div className="absolute top-2 right-2 w-3.5 h-3.5 border-t-2 border-r-2 border-cyan-400 z-20 pointer-events-none" />
+                <div className="absolute bottom-2 left-2 w-3.5 h-3.5 border-b-2 border-l-2 border-cyan-400 z-20 pointer-events-none" />
+                <div className="absolute bottom-2 right-2 w-3.5 h-3.5 border-b-2 border-r-2 border-cyan-400 z-20 pointer-events-none" />
+
                 <img 
                   src="/images/hero-edtech.jpg" 
                   alt="Docente Fundador RALE dictando clase virtual con analítica de IA a cadetes premilitares" 
@@ -316,13 +322,19 @@ function Hero() {
                 <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-transparent to-black/30 pointer-events-none" />
 
                 {/* Floating Badge 1 - Top Left */}
-                <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-obsidian-950/80 backdrop-blur-md border border-white/15 text-white text-xs font-semibold shadow-lg">
+                <div className="absolute top-4 left-4 z-10 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-obsidian-950/85 backdrop-blur-md border border-white/15 text-white text-xs font-semibold shadow-lg">
                   <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
                   Aula Inteligente RALE
                 </div>
 
+                {/* Floating Badge - Top Right */}
+                <div className="absolute top-4 right-4 z-10 hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-indigo-950/85 backdrop-blur-md border border-indigo-500/40 text-[11px] font-mono text-cyan-300">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  32 Cadetes Conectados
+                </div>
+
                 {/* Floating Badge 2 - Bottom Right */}
-                <div className="absolute bottom-4 right-4 flex items-center gap-2.5 p-3 rounded-2xl bg-obsidian-950/90 backdrop-blur-md border border-indigo-500/40 text-white shadow-xl max-w-[240px]">
+                <div className="absolute bottom-4 right-4 z-10 flex items-center gap-2.5 p-3 rounded-2xl bg-obsidian-950/90 backdrop-blur-md border border-indigo-500/40 text-white shadow-xl max-w-[240px]">
                   <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 to-cyan-600 flex items-center justify-center flex-shrink-0">
                     <Award className="w-5 h-5 text-white" />
                   </div>
@@ -434,18 +446,31 @@ function Authority() {
               enableTilt={true}
             >
               <div className="relative rounded-xl overflow-hidden aspect-[4/3] sm:aspect-auto sm:h-[420px]">
+                {/* Tactical HUD Corner Elements */}
+                <div className="absolute top-2 left-2 w-3.5 h-3.5 border-t-2 border-l-2 border-indigo-400 z-20 pointer-events-none" />
+                <div className="absolute top-2 right-2 w-3.5 h-3.5 border-t-2 border-r-2 border-indigo-400 z-20 pointer-events-none" />
+                <div className="absolute bottom-2 left-2 w-3.5 h-3.5 border-b-2 border-l-2 border-indigo-400 z-20 pointer-events-none" />
+                <div className="absolute bottom-2 right-2 w-3.5 h-3.5 border-b-2 border-r-2 border-indigo-400 z-20 pointer-events-none" />
+
                 <img 
                   src="/images/cadets-military.jpg" 
                   alt="Cadetes de la EMCH, EOFAP y aspirantes de la PNP en formación" 
                   className="w-full h-full object-cover brightness-95"
                 />
+                
+                {/* Top Badge */}
+                <div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 px-3 py-1 rounded-full bg-obsidian-950/85 backdrop-blur-md border border-indigo-500/40 text-[11px] font-mono text-cyan-300">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  POSTULANTES 2026-I
+                </div>
+
                 <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-black/20 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-obsidian-950/85 backdrop-blur-md border border-white/10 text-white">
+                <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-obsidian-950/85 backdrop-blur-md border border-white/10 text-white z-10">
                   <span className="text-[11px] font-bold text-cyan-300 uppercase tracking-widest block mb-0.5">
                     Semillero Pre-Militar RALE
                   </span>
                   <p className="text-xs text-slate-300 font-medium">
-                    Aspirantes a la EMCH, Escuela de Oficiales FAP y Policía Nacional del Perú formándose con excelencia académica.
+                    Aspirantes a la EMCH, Escuela de Oficiales FAP y Policía Nacional del Perú formándose con excelencia académica y disciplina rigurosa.
                   </p>
                 </div>
               </div>
@@ -732,16 +757,28 @@ function CertificationShowcase() {
 
             <div className="lg:col-span-5 relative">
               <SpotlightCard
-                className="p-2 border-indigo-400/30 bg-obsidian-950 shadow-2xl"
+                className="p-2 border-indigo-400/30 bg-obsidian-950 shadow-2xl relative"
                 spotlightColor="rgba(99, 102, 241, 0.3)"
                 enableTilt={true}
               >
                 <div className="relative rounded-xl overflow-hidden shadow-2xl">
+                  {/* Gold / Indigo Corner Accents */}
+                  <div className="absolute top-2 left-2 w-3.5 h-3.5 border-t-2 border-l-2 border-amber-400 z-20 pointer-events-none" />
+                  <div className="absolute top-2 right-2 w-3.5 h-3.5 border-t-2 border-r-2 border-amber-400 z-20 pointer-events-none" />
+                  <div className="absolute bottom-2 left-2 w-3.5 h-3.5 border-b-2 border-l-2 border-amber-400 z-20 pointer-events-none" />
+                  <div className="absolute bottom-2 right-2 w-3.5 h-3.5 border-b-2 border-r-2 border-amber-400 z-20 pointer-events-none" />
+
                   <img 
                     src="/images/edtech-certificate.jpg" 
                     alt="Constancia Oficial de Prácticas Pre-Profesionales y Docente Fundador RALE" 
                     className="w-full h-auto object-cover"
                   />
+
+                  {/* Top Badge */}
+                  <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5 px-3 py-1 rounded-full bg-obsidian-950/90 backdrop-blur-md border border-amber-400/40 text-[11px] font-mono text-amber-300 shadow-lg">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                    ACREDITACIÓN 120 HRS PPP
+                  </div>
                 </div>
               </SpotlightCard>
             </div>
