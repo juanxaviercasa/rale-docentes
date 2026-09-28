@@ -234,17 +234,17 @@ export default function HoursCalculator() {
                 </span>
               </div>
               <p className="text-xs text-slate-400 mb-3">
-                Por cada cadete que recomiendes y se matricule en la academia premilitar, recibes un bono directo de <strong className="text-amber-300">S/. 40 en efectivo</strong>:
+                Por cada cadete que recomiendes y se matricule en la academia, recibes un bono directo de <strong className="text-amber-300">S/. 40 en efectivo</strong>:
               </p>
-              <div className="flex items-center gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
                 {[0, 1, 2, 3, 5].map((num) => (
                   <button
                     key={num}
                     type="button"
                     onClick={() => setReferredStudents(num)}
-                    className={`flex-1 py-2 rounded-lg text-xs font-bold font-mono transition-all border ${
+                    className={`py-2 px-1 rounded-lg text-xs font-bold font-mono transition-all border text-center ${
                       referredStudents === num
-                        ? 'bg-amber-500/20 border-amber-400 text-amber-300'
+                        ? 'bg-amber-500/20 border-amber-400 text-amber-300 shadow-sm'
                         : 'bg-obsidian-850 border-white/[0.06] text-slate-400 hover:text-white'
                     }`}
                   >
@@ -252,6 +252,7 @@ export default function HoursCalculator() {
                   </button>
                 ))}
               </div>
+
             </SpotlightCard>
 
           </div>

@@ -82,28 +82,36 @@ function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const navLinks = [
+  const desktopNavLinks = [
     { label: 'Beneficios', href: '#beneficios' }, 
     { label: 'Cadetes', href: '#alumnos' },
     { label: 'Comparativa', href: '#comparativa' },
-    { label: 'Tecnología IA', href: '#tecnologia' },
     { label: 'Calculador PPP', href: '#simulador' },
-    { label: 'Evaluador', href: '#evaluador' },
-    { label: 'Certificación', href: '#certificacion' }, 
-    { label: 'Requisitos', href: '#requisitos' }, 
     { label: 'Preguntas', href: '#faq' }
+  ];
+
+  const allNavLinks = [
+    { label: 'Beneficios del Semillero', href: '#beneficios' }, 
+    { label: 'Cadetes Pre-Militares', href: '#alumnos' },
+    { label: 'Comparativa de Oportunidades', href: '#comparativa' },
+    { label: 'Tecnología & IA Pedagógica', href: '#tecnologia' },
+    { label: 'Calculador de Horas PPP', href: '#simulador' },
+    { label: 'Evaluador de Perfil', href: '#evaluador' },
+    { label: 'Certificación Oficial', href: '#certificacion' }, 
+    { label: 'Requisitos de Selección', href: '#requisitos' }, 
+    { label: 'Preguntas Frecuentes', href: '#faq' }
   ];
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       scrolled 
-        ? 'bg-obsidian-950/90 backdrop-blur-xl border-b border-white/[0.08] shadow-lg shadow-black/40' 
-        : 'bg-transparent border-b border-white/[0.04]'
+        ? 'bg-obsidian-950/95 backdrop-blur-xl border-b border-white/[0.08] shadow-lg shadow-black/60' 
+        : 'bg-obsidian-950/90 backdrop-blur-md border-b border-white/[0.06]'
     }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-4">
         
         {/* Brand Logo & Name */}
-        <a href="#" className="flex items-center gap-3 group">
+        <a href="#" className="flex items-center gap-3 group flex-shrink-0">
           <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl overflow-hidden bg-obsidian-850 border border-white/10 flex items-center justify-center p-1 group-hover:border-indigo-400/50 transition-colors flex-shrink-0">
             <img 
               src="/images/rale_logo.jpg" 
@@ -125,13 +133,13 @@ function Navbar() {
           </div>
         </a>
 
-        {/* Desktop Navigation Links */}
-        <nav aria-label="Navegación principal" className="hidden lg:flex items-center gap-5 xl:gap-6">
-          {navLinks.map((l) => (
+        {/* Desktop Navigation Links (Only xl: to ensure zero overflow) */}
+        <nav aria-label="Navegación principal" className="hidden xl:flex items-center gap-7">
+          {desktopNavLinks.map((l) => (
             <a 
               key={l.href} 
               href={l.href} 
-              className="text-slate-300 hover:text-white text-xs sm:text-sm font-medium transition-colors"
+              className="text-slate-300 hover:text-white text-sm font-semibold transition-colors whitespace-nowrap hover:text-cyan-300"
             >
               {l.label}
             </a>
@@ -139,42 +147,45 @@ function Navbar() {
         </nav>
 
         {/* Header Action CTA */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-shrink-0">
           <CTAButton 
             size="sm" 
             text="Unirse al Semillero" 
-            className="hidden sm:inline-flex"
+            className="hidden sm:inline-flex whitespace-nowrap"
           />
           <button 
-            className="lg:hidden text-slate-300 hover:text-white p-2 rounded-xl bg-obsidian-850 border border-white/10" 
+            className="xl:hidden text-slate-300 hover:text-white p-2 rounded-xl bg-obsidian-850 border border-white/10 transition-colors" 
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label={menuOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
           >
-            {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {menuOpen ? <X className="w-5 h-5 text-cyan-400" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile / Tablet Drawer */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div 
             initial={{ opacity: 0, height: 0 }} 
             animate={{ opacity: 1, height: 'auto' }} 
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-obsidian-950/95 backdrop-blur-2xl border-t border-white/[0.08] px-5 py-6 flex flex-col gap-3.5 shadow-2xl"
+            className="xl:hidden bg-obsidian-950/98 backdrop-blur-2xl border-t border-white/[0.08] px-5 py-6 flex flex-col gap-3 shadow-2xl"
           >
-            {navLinks.map((l) => (
-              <a 
-                key={l.href} 
-                href={l.href} 
-                onClick={() => setMenuOpen(false)} 
-                className="text-slate-200 hover:text-indigo-400 text-sm font-semibold py-1.5 transition-colors"
-              >
-                {l.label}
-              </a>
-            ))}
-            <div className="pt-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {allNavLinks.map((l) => (
+                <a 
+                  key={l.href} 
+                  href={l.href} 
+                  onClick={() => setMenuOpen(false)} 
+                  className="text-slate-300 hover:text-cyan-300 text-sm font-medium py-2.5 px-3 rounded-xl hover:bg-white/[0.05] transition-colors flex items-center justify-between"
+                >
+                  <span>{l.label}</span>
+                  <ChevronRight className="w-4 h-4 text-slate-600" />
+                </a>
+              ))}
+            </div>
+            <div className="pt-3 border-t border-white/[0.08]">
               <CTAButton 
                 size="md" 
                 text="👉 Unirse al Semillero en WhatsApp" 
