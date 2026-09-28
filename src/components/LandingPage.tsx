@@ -1050,6 +1050,18 @@ function Footer() {
               Convocatoria de Docentes Fundadores ·{' '}
               <span className="text-indigo-400 font-semibold">Semillero EdTech 2026</span>
             </p>
+            <p className="pt-2 text-slate-400">
+              Desarrollado por{' '}
+              <a 
+                href="https://xavier.cabellosalirrosas.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-cyan-400 hover:text-cyan-300 font-semibold hover:underline underline-offset-4 transition-colors inline-flex items-center gap-1"
+              >
+                <span>Xavier Cabello</span>
+                <ExternalLink className="w-3 h-3 inline-block" />
+              </a>
+            </p>
           </motion.div>
 
         </motion.div>
