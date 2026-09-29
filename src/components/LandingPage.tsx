@@ -6,7 +6,7 @@ import {
   Shield, Laptop, Award, Clock, Zap, FileCheck, CheckCircle2, 
   ChevronRight, ExternalLink, Menu, X, Sparkles, Users, 
   GraduationCap, TrendingUp, Check, ChevronDown, MessageCircle, Star,
-  Calculator, ArrowDown, Gift, ShieldCheck, Scale
+  Calculator, ArrowDown, Gift, ShieldCheck, Scale, FileText
 } from 'lucide-react';
 
 import SpotlightCard from './SpotlightCard';
@@ -15,6 +15,8 @@ import ProfileEvaluator from './ProfileEvaluator';
 import EdTechStackTabs from './EdTechStackTabs';
 import InstitutionsMarquee from './InstitutionsMarquee';
 import DynamicIslandBar from './DynamicIslandBar';
+import UrgencyCountdownBanner from './UrgencyCountdownBanner';
+import CurricularGuideModal from './CurricularGuideModal';
 
 const WA_LINK = 'https://chat.whatsapp.com/DOpudOHiXs7DKsmAo1KeM5?s=cl&p=a&mlu=4&ilr=4'; 
 
@@ -70,7 +72,7 @@ function CTAButton({
   );
 }
 
-function Navbar() {
+function Navbar({ onOpenGuide }: { onOpenGuide?: () => void }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -108,6 +110,7 @@ function Navbar() {
         ? 'bg-obsidian-950/95 backdrop-blur-xl border-b border-white/[0.08] shadow-lg shadow-black/60' 
         : 'bg-obsidian-950/90 backdrop-blur-md border-b border-white/[0.06]'
     }`}>
+      <UrgencyCountdownBanner />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-4">
         
         {/* Brand Logo & Name */}
@@ -147,7 +150,17 @@ function Navbar() {
         </nav>
 
         {/* Header Action CTA */}
-        <div className="flex items-center gap-3 flex-shrink-0">
+        <div className="flex items-center gap-2.5 flex-shrink-0">
+          {onOpenGuide && (
+            <button
+              onClick={onOpenGuide}
+              type="button"
+              className="hidden lg:inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-cyan-300 font-semibold py-2 px-3 rounded-xl bg-obsidian-850 border border-white/10 hover:border-cyan-500/40 transition-all"
+            >
+              <FileText className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Guía PPP 120h</span>
+            </button>
+          )}
           <CTAButton 
             size="sm" 
             text="Unirse al Semillero" 
@@ -172,6 +185,23 @@ function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             className="xl:hidden bg-obsidian-950/98 backdrop-blur-2xl border-t border-white/[0.08] px-5 py-6 flex flex-col gap-3 shadow-2xl"
           >
+            {onOpenGuide && (
+              <button
+                onClick={() => {
+                  setMenuOpen(false);
+                  onOpenGuide();
+                }}
+                type="button"
+                className="w-full flex items-center justify-between p-3 rounded-xl bg-indigo-950/40 border border-indigo-500/30 text-xs font-bold text-cyan-300 hover:text-white transition-colors"
+              >
+                <span className="flex items-center gap-2">
+                  <FileText className="w-4 h-4 text-cyan-400" />
+                  <span>Ver Guía Curricular & Plan 120 hrs</span>
+                </span>
+                <ChevronRight className="w-4 h-4 text-cyan-400" />
+              </button>
+            )}
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {allNavLinks.map((l) => (
                 <a 
@@ -199,9 +229,9 @@ function Navbar() {
   );
 }
 
-function Hero() {
+function Hero({ onOpenGuide }: { onOpenGuide?: () => void }) {
   return (
-    <section className="relative min-h-[92vh] flex items-center pt-24 sm:pt-28 pb-16 overflow-hidden">
+    <section className="relative min-h-[92vh] flex items-center pt-32 sm:pt-40 pb-16 overflow-hidden">
       {/* Background Calibrated Gradients */}
       <div 
         className="absolute inset-0 -z-10" 
@@ -268,7 +298,32 @@ function Hero() {
                   <span>Calcular Horas PPP</span>
                 </a>
               </div>
-              <div className="flex items-center gap-2 text-indigo-200/90 text-xs sm:text-sm font-medium bg-indigo-950/40 border border-indigo-800/40 rounded-xl px-4 py-2.5 max-w-xl">
+
+              {/* Secondary Actions & Coordinator Link */}
+              <div className="flex flex-wrap items-center gap-3 text-xs pt-1">
+                {onOpenGuide && (
+                  <button
+                    onClick={onOpenGuide}
+                    type="button"
+                    className="inline-flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 font-bold underline underline-offset-4 transition-colors"
+                  >
+                    <FileText className="w-3.5 h-3.5" />
+                    <span>Ver Guía Curricular & Plan 120 hrs</span>
+                  </button>
+                )}
+                <span className="text-slate-600 hidden sm:inline">·</span>
+                <a
+                  href={WA_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors"
+                >
+                  <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>¿Deseas consultar tu caso con Dirección Académica? Escríbenos ↗</span>
+                </a>
+              </div>
+
+              <div className="flex items-center gap-2 text-indigo-200/90 text-xs sm:text-sm font-medium bg-indigo-950/40 border border-indigo-800/40 rounded-xl px-4 py-2.5 max-w-xl mt-1">
                 <span className="text-base flex-shrink-0">📢</span>
                 <span>
                   <strong>Fase de Validación & Lanzamiento:</strong> Pasantía formativa modular de baja carga (2-4 hrs/sem) con constancia oficial de prácticas universitarias, bonos por alumnos referidos y prioridad #1 para contrato remunerado.
@@ -711,7 +766,7 @@ function ComparisonSection() {
   );
 }
 
-function CertificationShowcase() {
+function CertificationShowcase({ onOpenGuide }: { onOpenGuide?: () => void }) {
   return (
     <section id="certificacion" className="py-24 relative overflow-hidden bg-obsidian-950 border-t border-white/[0.06]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -750,8 +805,18 @@ function CertificationShowcase() {
                 ))}
               </div>
 
-              <div className="pt-3">
+              <div className="pt-3 flex flex-wrap items-center gap-3">
                 <CTAButton size="md" text="👉 Unirse al Semillero para Postular" />
+                {onOpenGuide && (
+                  <button
+                    onClick={onOpenGuide}
+                    type="button"
+                    className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-obsidian-850 hover:bg-obsidian-800 text-slate-200 hover:text-white font-bold text-xs sm:text-sm border border-white/10 transition-colors"
+                  >
+                    <FileText className="w-4 h-4 text-amber-400" />
+                    <span>Ver Modelo de Constancia & Plan</span>
+                  </button>
+                )}
               </div>
             </div>
 
@@ -830,7 +895,33 @@ function Requirements() {
             ))}
           </div>
 
-          <div className="mt-8 pt-6 border-t border-white/[0.08] flex flex-col gap-3">
+          {/* Quick Onboarding Protocol (60 segundos) */}
+          <div className="mt-8 pt-6 border-t border-white/[0.08]">
+            <span className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-bold block mb-3 flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+              Protocolo de Incorporación Rápida (Toma menos de 60 segundos)
+            </span>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs mb-2">
+              <div className="p-3 rounded-xl bg-obsidian-850/90 border border-white/[0.06]">
+                <span className="text-cyan-400 font-mono font-bold block mb-1">01. WhatsApp</span>
+                <p className="text-slate-400 text-[11px] leading-relaxed">Ingresas al grupo oficial del semillero docente.</p>
+              </div>
+              <div className="p-3 rounded-xl bg-obsidian-850/90 border border-white/[0.06]">
+                <span className="text-cyan-400 font-mono font-bold block mb-1">02. Ficha Rápida</span>
+                <p className="text-slate-400 text-[11px] leading-relaxed">Completas 4 datos: carrera, ciclo y materia a dictar.</p>
+              </div>
+              <div className="p-3 rounded-xl bg-obsidian-850/90 border border-white/[0.06]">
+                <span className="text-cyan-400 font-mono font-bold block mb-1">03. Inducción</span>
+                <p className="text-slate-400 text-[11px] leading-relaxed">Taller virtual en vivo de IA y entrega de balotarios.</p>
+              </div>
+              <div className="p-3 rounded-xl bg-obsidian-850/90 border border-white/[0.06]">
+                <span className="text-emerald-400 font-mono font-bold block mb-1">04. Acreditación</span>
+                <p className="text-slate-400 text-[11px] leading-relaxed">Inicio de micro-bloques y cómputo de horas PPP.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 pt-6 border-t border-white/[0.08] flex flex-col gap-3">
             <div>
               <CTAButton size="md" text="👉 Unirse al Grupo de WhatsApp" />
             </div>
@@ -942,6 +1033,14 @@ function FAQ() {
     {
       q: '¿Qué pasará una vez que me una al grupo de WhatsApp?',
       a: 'En el grupo privado anunciaremos la fecha y hora de la sesión oficial de inducción en vivo. Te mostraremos la plataforma, cómo usar la IA para preparar balotarios en minutos y resolveremos todas tus consultas antes de asignar los micro-turnos.'
+    },
+    {
+      q: '¿Qué universidades peruanas convalidan esta constancia de prácticas?',
+      a: 'El plan curricular del Semillero RALE está estructurado conforme a la Ley Universitaria 30220. Estudiantes de universidades públicas (UNMSM, UNI, UNFV, Cantuta, UNAC, UNSA, etc.) y privadas (PUCP, UTP, UPN, César Vallejo, etc.) pueden convalidar sus horas de prácticas pre-profesionales (PPP) mediante nuestra constancia oficial emitida con desglose de horas pedagógicas, código QR institucional y firma de la dirección académica.'
+    },
+    {
+      q: '¿Qué mensaje debo enviar o qué pasos debo seguir al ingresar al grupo?',
+      a: '¡El proceso toma menos de 1 minuto! Al unirte, el equipo de coordinación te dará la bienvenida y encontrarás un enlace fijado para registrar tu universidad, ciclo, carrera y la materia que deseas dictar. Con ello aseguras tu especialidad antes de que se completen los cupos de la cohorte.'
     }
   ];
 
@@ -991,7 +1090,7 @@ function FAQ() {
   );
 }
 
-function Footer() {
+function Footer({ onOpenGuide }: { onOpenGuide?: () => void }) {
   const { ref, controls } = useScrollReveal();
   return (
     <footer className="relative pt-20 pb-16 border-t border-white/[0.08] bg-obsidian-950 overflow-hidden">
@@ -1026,7 +1125,17 @@ function Footer() {
           </motion.div>
 
           {/* Links and Credits */}
-          <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-6 pt-10 border-t border-white/[0.08] w-full mt-4">
+          <motion.div variants={fadeUp} className="flex flex-wrap justify-center items-center gap-6 pt-10 border-t border-white/[0.08] w-full mt-4">
+            {onOpenGuide && (
+              <button 
+                onClick={onOpenGuide}
+                type="button"
+                className="flex items-center gap-1.5 text-slate-400 hover:text-cyan-400 text-xs sm:text-sm transition-colors font-medium"
+              >
+                <FileText className="w-3.5 h-3.5 text-cyan-400" />
+                <span>Guía Curricular & Plan 120 hrs</span>
+              </button>
+            )}
             {[
               { label: 'rale.sistemazenit.com', href: 'https://rale.sistemazenit.com' }, 
               { label: 'raletest.sistemazenit.com', href: 'https://raletest.sistemazenit.com' }
@@ -1071,11 +1180,13 @@ function Footer() {
 }
 
 export default function LandingPage() {
+  const [guideModalOpen, setGuideModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-obsidian-950 text-white font-sans antialiased selection:bg-indigo-500/30 selection:text-indigo-200">
-      <Navbar />
+      <Navbar onOpenGuide={() => setGuideModalOpen(true)} />
       <main>
-        <Hero />
+        <Hero onOpenGuide={() => setGuideModalOpen(true)} />
         <InstitutionsMarquee />
         <StatMetrics />
         <Authority />
@@ -1084,13 +1195,14 @@ export default function LandingPage() {
         <EdTechStackTabs />
         <HoursCalculator />
         <ProfileEvaluator />
-        <CertificationShowcase />
+        <CertificationShowcase onOpenGuide={() => setGuideModalOpen(true)} />
         <Requirements />
         <Timeline />
         <FAQ />
       </main>
-      <Footer />
+      <Footer onOpenGuide={() => setGuideModalOpen(true)} />
       <DynamicIslandBar />
+      <CurricularGuideModal isOpen={guideModalOpen} onClose={() => setGuideModalOpen(false)} />
     </div>
   );
 }

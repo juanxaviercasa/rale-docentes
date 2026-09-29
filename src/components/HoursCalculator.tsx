@@ -16,6 +16,8 @@ interface SubjectArea {
   demandLevel: 'Alta Demanda' | 'Prioridad Máxima' | 'Convocatoria Activa';
   badgeColor: string;
   icon: string;
+  remainingSlots: number;
+  totalSlots: number;
 }
 
 const AREAS: SubjectArea[] = [
@@ -25,6 +27,8 @@ const AREAS: SubjectArea[] = [
     demandLevel: 'Prioridad Máxima',
     badgeColor: 'text-cyan-400 border-cyan-500/30 bg-cyan-500/10',
     icon: '📐',
+    remainingSlots: 2,
+    totalSlots: 6,
   },
   {
     id: 'humanidades',
@@ -32,6 +36,8 @@ const AREAS: SubjectArea[] = [
     demandLevel: 'Convocatoria Activa',
     badgeColor: 'text-indigo-300 border-indigo-500/30 bg-indigo-500/10',
     icon: '📚',
+    remainingSlots: 2,
+    totalSlots: 4,
   },
   {
     id: 'aptitud',
@@ -39,6 +45,8 @@ const AREAS: SubjectArea[] = [
     demandLevel: 'Alta Demanda',
     badgeColor: 'text-emerald-300 border-emerald-500/30 bg-emerald-500/10',
     icon: '🧠',
+    remainingSlots: 3,
+    totalSlots: 5,
   },
 ];
 
@@ -94,6 +102,26 @@ export default function HoursCalculator() {
           {/* Left Column: Controls (7 cols) */}
           <div className="lg:col-span-7 flex flex-col gap-6">
             
+            {/* Cohort Quota Status Bar */}
+            <div className="p-3.5 sm:p-4 rounded-xl bg-obsidian-900/90 border border-indigo-500/30 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs shadow-lg">
+              <div className="flex items-center gap-2.5">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+                </span>
+                <div>
+                  <span className="text-white font-bold block sm:inline">Cohorte Docente Fundador 2026-I: </span>
+                  <span className="text-slate-300">8 de 15 cupos ocupados</span>
+                </div>
+              </div>
+              <div className="flex items-center gap-2.5 w-full sm:w-auto">
+                <div className="w-full sm:w-28 h-2 rounded-full bg-obsidian-950 border border-white/10 overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-indigo-500 via-cyan-400 to-emerald-400 rounded-full" style={{ width: '53%' }} />
+                </div>
+                <span className="text-cyan-400 font-mono font-bold text-[11px] whitespace-nowrap">53% Asignado</span>
+              </div>
+            </div>
+
             {/* Control 1: Área de Enseñanza */}
             <SpotlightCard className="p-6 sm:p-7" spotlightColor="rgba(99, 102, 241, 0.15)">
               <div className="flex items-center justify-between mb-4">
@@ -101,7 +129,9 @@ export default function HoursCalculator() {
                   <span className="w-2 h-2 rounded-full bg-indigo-500" />
                   1. Materia o Área de Especialidad
                 </span>
-                <span className="text-xs text-slate-500">Área a dictar</span>
+                <span className="text-xs text-amber-400 font-mono font-bold">
+                  {currentArea.remainingSlots} vacantes en esta área
+                </span>
               </div>
 
               <div className="grid sm:grid-cols-3 gap-3">
@@ -120,17 +150,24 @@ export default function HoursCalculator() {
                     >
                       <div className="flex items-center justify-between">
                         <span className="text-2xl">{area.icon}</span>
-                        {isSelected && (
+                        {isSelected ? (
                           <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+                        ) : (
+                          <span className="text-[10px] font-mono text-slate-500">{area.remainingSlots}/{area.totalSlots}</span>
                         )}
                       </div>
                       <div>
                         <div className="font-bold text-white text-sm leading-tight mb-1">
                           {area.name}
                         </div>
-                        <span className={`inline-block px-2 py-0.5 rounded text-[10px] font-semibold border ${area.badgeColor}`}>
-                          {area.demandLevel}
-                        </span>
+                        <div className="flex flex-wrap items-center gap-1.5 mt-1.5">
+                          <span className={`inline-block px-1.5 py-0.5 rounded text-[10px] font-semibold border ${area.badgeColor}`}>
+                            {area.demandLevel}
+                          </span>
+                          <span className="text-[10px] text-amber-400 font-mono font-bold">
+                            {area.remainingSlots} libres
+                          </span>
+                        </div>
                       </div>
                     </button>
                   );
